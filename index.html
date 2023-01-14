@@ -1,26 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+	<head>
+		<title>Campus Map</title>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAG3GYaBf2pquuCui1vcsLmcpHdhz_bQwo" async defer></script>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MapViz</title>
-    <link rel="stylesheet" href="https://leafletjs-cdn.s3.amazonaws.com/content/leaflet/v1.9.3/leaflet.css" />
-    <style>
-      #mapid {
-        position: fixed;
-        width: 80%;
-        height: 100%;
-        top: 0;
-        left: 3rem;
-      }
-    </style>
-  </head>
+		<link
+			rel="stylesheet"
+			href="https://leafletjs-cdn.s3.amazonaws.com/content/leaflet/v1.9.3/leaflet.css"
+		
+		/>
+		<script
+			src="https://leafletjs-cdn.s3.amazonaws.com/content/leaflet/v1.9.3/leaflet.js"
+		
+		></script>
 
-  <body>
-    <div id="mapid"></div>
-    <script src="https://leafletjs-cdn.s3.amazonaws.com/content/leaflet/v1.9.3/leaflet.js"></script>
-    <script src="script.js"></script>
-  </body>
-
+		<script src="https://unpkg.com/leaflet.gridlayer.googlemutant@latest/dist/Leaflet.GoogleMutant.js"></script>
+		<style>
+			#map {
+				position: absolute;
+				left: 15em;
+				right: 0;
+				height: 100vh;
+			}
+			body {
+				margin: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="map" class="map"></div>
+		<div style="position: absolute; width: 15em; top: 10px; z-index: 500">
+			Animation Test
+			<div><button id="McMaster1">McMaster</button><small>Fly Animation</small></div>
+			<div><button id="McMaster2">McMaster</button><small>Set View Animation</small></div>
+		</div>
+		<script
+			src="script.js"
+		></script>
+	</body>
 </html>
