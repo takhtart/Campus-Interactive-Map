@@ -23,6 +23,7 @@
         }
     }
 
+    
     class GeometricSymbol extends LegendSymbol {
         constructor(control, container, legend) {
             super(control, container, legend);
