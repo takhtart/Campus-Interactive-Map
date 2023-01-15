@@ -364,7 +364,7 @@ var leafletControlGeocoder = (function (exports, L) {
 
     _proto.geocode = function geocode(query, cb, context) {
       var params = geocodingParams(this.options, {
-        key: 'AIzaSyAG3GYaBf2pquuCui1vcsLmcpHdhz_bQwo',
+        key: '',
         address: query
       });
       getJSON(this.options.serviceUrl, params, function (data) {
