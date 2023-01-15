@@ -47,7 +47,7 @@
 				//popupAnchor:  [-3, -76]
 			});
 
-			var alumni_House = L.marker([43.26518094700698, -79.92301044918118], {icon: buildingIcon},{"title":"Alumni House"}).bindPopup('Alumni House'),
+			var alumni_House = L.marker([43.26518094700698, -79.92301044918118], {icon: buildingIcon},{title:"Alumni House"}).bindPopup('Alumni House'),
 				alumni_Memorial_Hall = L.marker([43.26397129243122, -79.91966833683068], {icon: buildingIcon}).bindPopup('Alumni Memorial Hall (University Club)'),
 				ADL = L.marker([43.26338472524064, -79.92741377296909], {icon: buildingIcon}).bindPopup('Applied Dynamics Laboratory (ADL)'),
 				ABB = L.marker([43.26024673736459, -79.92178256090025], {icon: buildingIcon}).bindPopup('Arthur N. Bourns Building (ABB)'),
@@ -145,7 +145,8 @@
 				P = L.marker([43.264183527185416, -79.92729057822426], {icon: parkingIcon}).bindPopup('Parking Lot P'),
 				wilson_underground = L.marker([43.26220716764564, -79.91699352498799], {icon: parkingIcon}).bindPopup('Wilson Underground Parking'),
 				stadium_underground = L.marker([43.266894659387845, -79.91674527970409], {icon: parkingIcon}).bindPopup('Stadium Underground Parking')
-				HSC_Parking = L.marker([43.26002241271315, -79.91752331655162], {icon: parkingIcon}).bindPopup('HSC_Parking'),
+				HSC_Parking = L.marker([43.26002241271315, -79.91752331655162], {icon: parkingIcon}).bindPopup('HSC_Parking')
+
 
 				madBounds = [
 					[40.7, -4.19],
@@ -170,11 +171,11 @@
 			})
 
 			//OpenStreet Map
-			//gmap = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			//omap = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 			//	attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 			//})
 			
-
+			
 
 			var southWest = L.latLng(43.2573691315058, -79.93213830932247),
     			northEast = L.latLng(43.26891643196347, -79.9102314311739),
@@ -190,21 +191,34 @@
 			//Routing
 			L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(map);
 
-			//L.Routing.control({
-			//	waypoints: [
-			//	  L.latLng(43.258430387558334, -79.92009092932781),
-			//	  L.latLng(43.265058583060714, -79.91586108963861)
-			//	]
-			//  }).addTo(map);
+			L.Routing.control({
+				waypoints: [
+				  L.latLng(43.26226823514483, -79.92955518448068),
+				  L.latLng(43.26083813984687, -79.92040061341251)
+				]
+			  }).addTo(map);
 
 			
+			//L.Routing.control({
+			//	waypoints: [
+			//			  L.latLng(43.258430387558334, -79.92009092932781),
+			//			  L.latLng(43.265058583060714, -79.91586108963861)
+			//	],
+			//	router: L.Routing.esri({
+			//	liveTraffic: true,
+			//	profile: 'Walking',
+			//	url: 'https://utility.arcgis.com/usrsvcs/appservices/Dw8kWfmpd5NZb57b/rest/services/World/Route/NAServer/Route_World'
+			//  })
+			//  }).addTo(map);
 	
+			
+
 
 		
 			var rectangle = L.rectangle(madBounds).addTo(map);
 
 			var baseMaps = {
-				"GoogleMaps": gmap
+				"Campus Map": gmap
 			};
 
 			var overlayMaps = {
@@ -218,9 +232,21 @@
 
 			var layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);
 
-			L.Control.geocoder().addTo(map);
-			//var searchLayer = L.layerGroup().addTo(map);
-			//map.addControl( new L.Control.Search({layer: searchLayer}) );
+			var geocoder = L.Control.geocoder({
+				defaultMarkGeocode: false
+			  })
+				.on('markgeocode', function(e) {
+				  var bbox = e.geocode.bbox;
+				  var poly = L.polygon([
+					bbox.getSouthEast(),
+					bbox.getNorthEast(),
+					bbox.getNorthWest(),
+					bbox.getSouthWest()
+				  ]).addTo(map);
+				  map.fitBounds(poly.getBounds());
+				})
+				.addTo(map);
+			
 
 			
 
@@ -262,17 +288,7 @@
 					url: "field.png",
 				}, ]
 			}).addTo(map);
-
-			var controlSearch = new L.Control.Search({
-				position:'topright',		
-				layer: buildings,
-				initial: false,
-				zoom: 12,
-				marker: false
-			});
-		
-			map.addControl( controlSearch );
-
+			
 
 			//document.getElementById("McMaster1").onclick = function () {
 			//	map.flyTo(DBAC, 17);
