@@ -191,12 +191,12 @@
 			//Routing
 			L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png').addTo(map);
 
-			L.Routing.control({
-				waypoints: [
-				  L.latLng(43.26226823514483, -79.92955518448068),
-				  L.latLng(43.26083813984687, -79.92040061341251)
-				]
-			  }).addTo(map);
+			//L.Routing.control({
+			//	waypoints: [
+			//	  L.latLng(43.26226823514483, -79.92955518448068),
+			//	  L.latLng(43.26083813984687, -79.92040061341251)
+			//	]
+			// }).addTo(map);
 
 			
 			//L.Routing.control({
