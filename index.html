@@ -2,12 +2,17 @@
 <html>
 	<head>
 		<title>Campus Map</title>
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAG3GYaBf2pquuCui1vcsLmcpHdhz_bQwo" async defer></script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=" async defer></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 		<link
 			rel="stylesheet"
 			href="https://leafletjs-cdn.s3.amazonaws.com/content/leaflet/v1.9.3/leaflet.css"
+		
+		/>
+		<link
+			rel="stylesheet"
+			href="stylesheet.css"
 		
 		/>
 		<script
@@ -19,9 +24,10 @@
 		<style>
 			#map {
 				position: absolute;
-				left: 15em;
+				left: 0;
 				right: 0;
 				height: 100vh;
+				z-index: 1;
 			}
 			body {
 				margin: 0;
@@ -29,12 +35,8 @@
 		</style>
 	</head>
 	<body>
+
 		<div id="map" class="map"></div>
-		<div style="position: absolute; width: 15em; top: 10px; z-index: 500">
-			Animation Test
-			<div><button id="McMaster1">McMaster</button><small>Fly Animation</small></div>
-			<div><button id="McMaster2">McMaster</button><small>Set View Animation</small></div>
-		</div>
 		<script
 			src="script.js"
 		></script>
